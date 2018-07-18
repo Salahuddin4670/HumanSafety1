@@ -1,6 +1,7 @@
 package com.example.salahuddin.humansafety;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private TextView textView;
+    DatabaseHelper databaseHelper;
 
 
     @Override
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         textView.setAnimation(myAnimation);
         imageView.setAnimation(myAnimation);
+        databaseHelper = new DatabaseHelper(this);
+        SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
         final Intent intent = new Intent(this,LoginActivity.class);
 
