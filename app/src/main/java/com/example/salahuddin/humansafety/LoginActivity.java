@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     DatabaseHelper databaseHelper;
 
-    private Button signUpNowButton,forgetPasswordButton;
+    private Button mainLogInButton,signUpNowButton,forgetPasswordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,30 +21,36 @@ public class LoginActivity extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
         SQLiteDatabase sqLiteDatabase = databaseHelper.getWritableDatabase();
 
-
+        mainLogInButton = (Button) findViewById(R.id.loginButtonId);
         signUpNowButton = (Button) findViewById(R.id.signUpfromLoginPageButtonId);
         forgetPasswordButton = (Button) findViewById(R.id.forgetPasswordButtonId);
 
-        final Intent intentSignUp = new Intent(this,SignUpActivity.class);
-        final Intent intentForgetPass = new Intent(this,Re_setPassword.class);
-
-        signUpNowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               startActivity(intentSignUp);
-                finish();
-            }
-        });
-
-        forgetPasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intentForgetPass);
-                finish();
-            }
-        });
+        mainLogInButton.setOnClickListener(this);
+        signUpNowButton.setOnClickListener(this);
+        forgetPasswordButton.setOnClickListener(this);
 
     }
 
 
+    @Override
+    public void onClick(View v) {
+
+        if(v.getId() == R.id.mainLoginButtonId){
+
+
+        }
+
+        if(v.getId() == R.id.signUpfromLoginPageButtonId){
+            Intent intent= new Intent(this,SignUpActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        if(v.getId() == R.id.forgetPasswordButtonId){
+            Intent intent= new Intent(this,Re_setPassword.class);
+            startActivity(intent);
+            finish();
+
+        }
+    }
 }
