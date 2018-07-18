@@ -18,11 +18,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String EMAIL = "Email";
     public static final String PASSWORD = "Password";
     public static final String PHONE = "Phone";
-    public static final int VERSION_NUMBER = 3;
+    public static final int VERSION_NUMBER = 5;
 
-    public static final String CREATE_TABLE = "CREATE TABLE "+TABLE_NAME+"("+ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+NAME+" VARCHAR(100) NOT NULL,"+EMAIL+" VARCHAR(100) NOT NULL,"+PASSWORD+" VARCHAR(50) NOT NULL,"+PHONE+" VARCHAR(15) NOT NULL";
-
-    public static final String DROP_TABLE = "DROP TABLE IF EXISTS" + TABLE_NAME;
+    private static final String CREATE_TABLE = "create table "+TABLE_NAME+" ("+ID+" integer primary key autoincrement,"+NAME+" varchar(20) not null,"+EMAIL+" varchar(30) not null,"+PASSWORD+" varchar(50) not null,"+PHONE+" varchar(40)not null)";
+    private static final String DROP_TABLE = "drop table if exists "+TABLE_NAME;
     private Context context;
 
     public DatabaseHelper(Context context) {
@@ -34,9 +33,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try{
             db.execSQL(CREATE_TABLE);
-            Toast.makeText(context,"Create",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"oN Create is called",Toast.LENGTH_SHORT).show();
         }catch (Exception e){
-            Toast.makeText(context,"Error: "+e,Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Exception: "+e,Toast.LENGTH_SHORT).show();
 
         }
 
@@ -47,11 +46,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         try{
+            Toast.makeText(context,"oN Upgrade is called",Toast.LENGTH_LONG).show();
             db.execSQL(DROP_TABLE);
             onCreate(db);
         }catch (Exception e){
 
-            Toast.makeText(context,"Error: "+e,Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"Exception: "+e,Toast.LENGTH_SHORT).show();
 
         }
 
